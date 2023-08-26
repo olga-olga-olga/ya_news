@@ -50,7 +50,6 @@ class TestDetailPage(TestCase):
         cls.news = News.objects.create(
             title='Тестовая новость', text='Просто текст.'
         )
-        # Сохраняем в переменную адрес страницы с новостью:
         cls.detail_url = reverse('news:detail', args=(cls.news.id,))
         cls.author = User.objects.create(username='Комментатор')
         now = timezone.now()
