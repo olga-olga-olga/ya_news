@@ -22,7 +22,9 @@ def test_news_order(client, news_more_than_on_page):
 
 
 @pytest.mark.django_db
-def test_comments_order(client, comments_with_different_dates, new_id_for_args):
+def test_comments_order(
+        client, comments_with_different_dates, new_id_for_args
+        ):
     url = reverse('news:detail', args=new_id_for_args)
     response = client.get(url)
     assert 'news' in response.context

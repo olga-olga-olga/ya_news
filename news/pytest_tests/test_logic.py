@@ -45,7 +45,9 @@ def test_user_cant_use_bad_words(admin_client, new_id_for_args):
     assert comments_count == 0
 
 
-def test_author_can_delete_comment(author_client, new_id_for_args, comment_id_for_args):
+def test_author_can_delete_comment(
+        author_client, new_id_for_args, comment_id_for_args
+        ):
     delete_url = reverse('news:delete', args=comment_id_for_args)
     response = author_client.delete(delete_url)
     news_url = reverse('news:detail', args=new_id_for_args)
@@ -55,7 +57,9 @@ def test_author_can_delete_comment(author_client, new_id_for_args, comment_id_fo
     assert comments_count == 0
 
 
-def test_user_cant_delete_comment_of_another_user(admin_client, comment_id_for_args):
+def test_user_cant_delete_comment_of_another_user(
+        admin_client, comment_id_for_args
+        ):
     delete_url = reverse('news:delete', args=comment_id_for_args)
     response = admin_client.delete(delete_url)
     assert response.status_code == HTTPStatus.NOT_FOUND
@@ -65,7 +69,7 @@ def test_user_cant_delete_comment_of_another_user(admin_client, comment_id_for_a
 
 def test_author_can_edit_comment(
         author_client, comment_id_for_args, new_id_for_args, comment
-):
+        ):
     edit_url = reverse('news:edit', args=comment_id_for_args)
     response = author_client.post(
         edit_url, data={'text': 'Обновлённый комментарий'}
